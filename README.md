@@ -12,3 +12,12 @@ The string:
 Should produce:
 SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t
 
+### 2: Fixed XOR
+This program will take two equal-length buffers and produces their XOR combination.
+
+The strings, after hex decoding and XOR'd:
+1c0111001f010100061a024b53535009181c
+686974207468652062756c6c277320657965
+
+should produce:
+746865206b696420646f6e277420706c6179
