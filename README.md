@@ -47,3 +47,8 @@ The frequency scores that are used are:
     * Divided given number by 1000 to get punctuation freq per word.
     * Divided by 5 to get punctuation per letter (assume average of 5 letters per word)
     * Multiple by 100 to get percent.
+
+### 4: Detect single-character XOR
+This program will read through a file of strings and search for one that is
+a single-charicter XOR cipher.
+

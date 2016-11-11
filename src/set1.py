@@ -5,6 +5,7 @@ from binascii import Error as BinasciiError
 from string import printable, punctuation
 
 HEX4 = b'1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
+XOR_URL = 'http://cryptopals.com/static/challenge-data/4.txt'
 printable_set = set(printable)
 punctuation_set = set(punctuation)
 freq = {
@@ -37,7 +38,7 @@ def decode_xor(input1):
     """Decodes a single xor cipher."""
 
     max_score = 0
-
+    information = ('', 0, '')
     for i in range(255):
         result = ''
         score = 0
@@ -59,5 +60,23 @@ def decode_xor(input1):
 
     return information
 
+
+def search_for_xor_cipher():
+    try:
+        # For Python 3.0 and later
+        from urllib.request import urlopen
+    except ImportError:
+        # Fall back to Python 2's urllib2
+        from urllib2 import urlopen
+
+    max_score = 0
+    for line_num, line in enumerate(urlopen(XOR_URL)):
+        result, score, key = decode_xor(line.rstrip(b'\n'))
+        if score > max_score:
+            return_text = result
+            max_score = score
+            line_number = line_num
+    return '{}: {}'.format(line_number, return_text)
+
 if __name__ == '__main__':
-    print(decode_xor(HEX4))
+    print(search_for_xor_cipher())
