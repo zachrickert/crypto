@@ -37,11 +37,9 @@ def decode_xor(input1):
     """Decodes a single xor cipher."""
 
     max_score = 0
-    result_list = []
 
     for i in range(255):
         result = ''
-        printable = True
         score = 0
         for j in range(len(input1) // 2):
             temp = chr(int(input1[2 * j: 2 * (j + 1)], 16) ^ i)
@@ -53,14 +51,13 @@ def decode_xor(input1):
                     if temp.isdigit():
                         score += 4
             else:
-                printable = False
+                score = 0
                 break
-        if printable:
-            if score > max_score:
-                result_list.append(result)
-                max_score = score
+        if score > max_score:
+            information = result, score, chr(i)
+            max_score = score
 
-    return result_list.pop()
+    return information
 
 if __name__ == '__main__':
     print(decode_xor(HEX4))
