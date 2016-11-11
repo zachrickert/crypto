@@ -92,3 +92,7 @@ ENV/
 bin
 pyvenv.cfg
 
+# Other user added
+pip-selfcheck.json
+
+
