@@ -2,14 +2,15 @@
 """Testing for hex_to_b64.py module."""
 import pytest
 
-from set1 import hex_to_b64, fixed_xor
+from set1 import hex_to_b64, fixed_xor, decode_xor
 
 HEX1 = b"49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
 NOT_HEXSTRING = b"Not a hexistring"
-BASE64 = 'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'
+BASE64 = b'SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t'
 HEX2 = b'1c0111001f010100061a024b53535009181c'
 HEX3 = b'686974207468652062756c6c277320657965'
 HEX_RESULT1 = b'746865206b696420646f6e277420706c6179'
+HEX4 = b'1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
 
 # -------------------hex_to_bin64.py Tests------------------------
 # [x] Accepts text if incoming is hexidecimal.
@@ -36,7 +37,7 @@ def test_hex_to_bin64_outputs_correct_value():
 # -------------------fixed_xor.py Tests------------------------
 # [x] Accepts two buffers.
 # [x] Unequal buffer lengths not equal length raises error.
-# [] Returns correct XOR'd value.
+# [x] Returns correct XOR'd value.
 
 
 def test_fixed_xor_accepts_two_buffers():
@@ -53,3 +54,12 @@ def test_fixed_xor_raises_error_if_buffer_lengths_not_equal():
 def test_fixed_xor_returns_correct_amount():
     """Returns correct XOR'd value."""
     assert fixed_xor(HEX2, HEX3) == HEX_RESULT1
+
+
+# ----------------single_xor_cipher.py Tests----------------------
+# [] Accepts a hex string.
+
+def test_decode_single_xor_accepts_hex():
+    """Accepts a hex string."""
+    assert decode_xor(HEX4)
+
