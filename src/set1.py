@@ -4,7 +4,6 @@ from binascii import unhexlify, b2a_base64
 from binascii import Error as BinasciiError
 from string import printable, punctuation
 
-HEX4 = b'1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
 XOR_URL = 'http://cryptopals.com/static/challenge-data/4.txt'
 printable_set = set(printable)
 punctuation_set = set(punctuation)
@@ -61,7 +60,7 @@ def decode_xor(input1):
     return information
 
 
-def search_for_xor_cipher():
+def search_for_xor_cipher(filname):
     try:
         # For Python 3.0 and later
         from urllib.request import urlopen
@@ -70,7 +69,7 @@ def search_for_xor_cipher():
         from urllib2 import urlopen
 
     max_score = 0
-    for line_num, line in enumerate(urlopen(XOR_URL)):
+    for line_num, line in enumerate(urlopen(filname)):
         result, score, key = decode_xor(line.rstrip(b'\n'))
         if score > max_score:
             return_text = result
@@ -78,5 +77,20 @@ def search_for_xor_cipher():
             line_number = line_num
     return '{}: {}'.format(line_number, return_text)
 
+
+def repeating_xor(text, key):
+    encoded = ''
+    count = 0
+    for letter in text:
+        if letter == '\n':
+            # encoded += '\n'
+            continue
+        coded_let = hex(ord(letter) ^ ord(key[count % len(key)]))
+        encoded += coded_let.lstrip('0x').zfill(2)
+        count += 1
+    return encoded
+
 if __name__ == '__main__':
-    print(search_for_xor_cipher())
+    string = """Burning 'em, if you ain't quick and nimble
+    I go crazy when I hear a cymbal"""
+    print(repeating_xor(string, "ICE"))

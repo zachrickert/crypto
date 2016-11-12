@@ -57,9 +57,33 @@ def test_fixed_xor_returns_correct_amount():
 
 
 # ----------------single_xor_cipher.py Tests----------------------
-# [] Accepts a hex string.
+# [x] Accepts a hex string.
+# [x] Returns a three-tuple.
+# [x] First return value is a decoded string.
+# [x] Second return value is a float.
+# [x] Third return value in a single length byte string.
 
 def test_decode_single_xor_accepts_hex():
     """Accepts a hex string."""
     assert decode_xor(HEX4)
+
+
+def test_decode_single_xor_returns_tuple():
+    """Returns a three-tuple."""
+    assert isinstance(decode_xor(HEX4), tuple)
+
+
+def test_decode_single_xor_returns_string_1st_place():
+    """Returns a three-tuple."""
+    assert isinstance(decode_xor(HEX4)[0], str)
+
+
+def test_decode_single_xor_returns_float_2nd_place():
+    """Returns a three-tuple."""
+    assert isinstance(decode_xor(HEX4)[1], float)
+
+
+def test_decode_single_xor_returns_key_3rd_place():
+    """Returns a three-tuple."""
+    assert len(decode_xor(HEX4)[2]) == 1
 

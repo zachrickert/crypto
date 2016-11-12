@@ -3,8 +3,11 @@ This repository contains challenges from the the [cryptopals crypto challenges](
 
 ##Set 1: Basics
 
-### 1: Convert heßx to base64
+### 1: Convert hex to base64
 This program will convert a hexidecimal string to base64.
+**hex_to_b64(input)**
+* **input** - hexstring
+* **return** - base64 string
 
 The string:
 49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d
@@ -14,6 +17,9 @@ SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t
 
 ### 2: Fixed XOR
 This program will take two equal-length buffers and produces their XOR combination.
+**fixed_xor(input1, input2)**
+* **input1** & **input2** - hexstring inputs
+* **return** - the XOR'd combination of the two strings
 
 The strings, after hex decoding and XOR'd:
 1c0111001f010100061a024b53535009181c
@@ -24,6 +30,12 @@ should produce:
 
 ### 3: Decode XOR cipher
 This program will dechper a single XOR cipher.
+**decode_xor(input)**
+* **input** - hex string to decode.
+* **return** - result, score, key
+    * result - the decoded message
+    * score - the given score
+    * key - the key that coded the message.
 
 It will loop through the 255 possible combinations for the XOR key.
 Each function will be scored against the frequency of different letters,
@@ -49,6 +61,24 @@ The frequency scores that are used are:
     * Multiple by 100 to get percent.
 
 ### 4: Detect single-character XOR
-This program will read through a file of strings and search for one that is
+**search_for_xor_cipher(filname)**
+* **filename** - the url that the file is at.
+* **return** - The decoded line in the file that has the highest score.
+
+This program will read through a text [file](http://cryptopals.com/static/challenge-data/4.txt) of strings and search for one that is
 a single-charicter XOR cipher.
+
+### 5: Implement repeating-key XOR
+This program encrypts a repeating-key XOR cipher.
+
+The passage:
+    Burning 'em, if you ain't quick and nimble
+    I go crazy when I hear a cymbal
+
+When using the key 'ICE', Should come out to:
+    0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272
+    a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f
+
+
+
 
